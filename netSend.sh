@@ -29,6 +29,16 @@ echo '| |\  |  __/ |_       ____) |  __/ | | | (_| |'
 echo '|_| \_|\___|\__|     |_____/ \___|_| |_|\__,_|  ...by arturo'
 echo
 
+if ! hash rsync 2>/dev/null; then
+	read -p "Para proceder debe instalarse rsync, ¿proceder? [s/n]: " instalar_opc
+	if ! [[ $instalar_opc = s ]]; then
+		echo "Saliendo..."
+		exit 1
+	else
+		apt install rsync -y
+	fi
+fi
+
 read -p "Inserte el directorio o fichero que se desea copiar al remoto: " directorio
 
 if ! [[ -d $directorio ]] && ! [[ -f $directorio ]]; then
